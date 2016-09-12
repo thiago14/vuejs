@@ -1,13 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Vue.js</title>
-</head>
-<body id="app">
-
-    <h1>{{ title}}</h1>
-    <script type="text/javascript" src="node_modules/vue/dist/vue.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue.js</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+        <style type="text/css">
+            .pago { color: green;}
+            .nao-pago { color: red;}
+        </style>
+    </head>
+    <body id="app">
+        <div class="container">
+            <h1>{{ title }}</h1>
+            <nav class="blue lighten-2">
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile" class="left">
+                        <li v-for="m in menus">
+                            <a href="#" @click.prevent="showView(m.id)">{{ m.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <br>
+            <div class="row" v-if="activedView === 0">
+                <h5>{{ status }}</h5>
+                <table class="bordered striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vencimento</th>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th class="center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(index, c) in bills">
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ c.date_due }}</td>
+                            <td>{{ c.name }}</td>
+                            <td>{{ c.value | currency 'R$ '}}</td>
+                            <td :class="{'pago': c.done, 'nao-pago': !c.done}">
+                                {{ c.done | doneLabel }}
+                            </td>
+                            <td class="center">
+                                <a href="#" @click="loadBill(c)" >Editar</a> |
+                                <a href="#" @click="deleteBill($index)" >Deletar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" v-if="activedView === 1">
+                <form class="col s12" @submit.prevent="submit">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="date_due" type="text" v-model="bill.date_due">
+                            <label class="active" for="date_due">Vencimento</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label class="active" for="name">Nome</label>
+                            <select class="browser-default" v-model="bill.name" id="name">
+                                <option v-for="o in contas" :value="o" >{{ o }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="value" type="number" min="1" step="any" v-model="bill.value">
+                            <label class="active" for="value">Value</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <button class="btn waves-effect waves-light" type="submit">Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="node_modules/vue/dist/vue.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
 </html>
