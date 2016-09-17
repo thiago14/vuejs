@@ -1,17 +1,8 @@
-var model_bill = {
-    date_due: '',
-    name: '',
-    value: null,
-    done: 0
-};
-
 Vue.filter('doneLabel', function (value) {
-    if(value == 0)
-    {
-        return 'Não paga';
-    }else{
+    if(value) {
         return 'Paga';
     }
+    return 'Não paga';
 
 });
 
@@ -25,7 +16,8 @@ var app = new Vue({
         ],
         activedView: 0,
         formType: 'insert',
-        bill: model_bill,
+        bill: {},
+        count: 0,
         contas: [
             'Conta de luz',
             'Conta de agua',
@@ -36,37 +28,42 @@ var app = new Vue({
             'DAS',
             'Seguro de vida'
         ],
-        bills: [
-            {date_due: '20/09/2016', name: 'Conta de luz', value: 70.00, done: 1},
-            {date_due: '20/09/2016', name: 'Conta de agua', value: 40.28, done: 0},
-            {date_due: '20/09/2016', name: 'Conta de Telefone', value: 140.50, done: 0},
-            {date_due: '20/09/2016', name: 'DAS', value: 49.00, done: 0},
-            {date_due: '16/09/2016', name: 'Seguro de vida', value: 49.00, done: 0}
-        ]
+        bills: []
     },
     computed: {
         status: function () {
-            var count = 0;
-            for(var i in this.bills) {
-                if(!this.bills[i].done) {
-                    count++
+            this.count = null;
+
+            if(this.bills.length == 0) {
+                this.count = this.bills.length;
+                return 'Nenhuma conta cadastrada';
+            }else {
+                for(var i in this.bills) {
+                    if(!this.bills[i].done) {
+                        this.count++;
+                    }
                 }
+                return !this.count ? 'Nenhuma conta a pagar' : 'Existe(m) '+ this.count + ' conta(s) a ser(em) paga(s)';
             }
-            return !count ? 'Nenhuma conta a pagar' : 'Existem '+ count + ' contas a serem pagas';
         }
     },
     methods: {
         showView: function (id) {
-            this.activedView = id
+            this.activedView = id;
             if(id == 1) {
-                this.formType = 'insert'
+                this.formType = 'insert';
+                this.bill = {
+                    date_due: '',
+                    name: '',
+                    value: null,
+                    done: false
+                };
             }
         },
         submit: function () {
             if(this.formType === 'insert') {
-                this.bills.push(this.bill);
+                this.$data.bills.push(this.bill);
             }
-            this.bill = model_bill;
             this.activedView = 0;
         },
         loadBill: function (bill) {
@@ -74,13 +71,11 @@ var app = new Vue({
             this.activedView = 1;
             this.formType = 'update';
         },
-        deleteBill: function(index)
-        {
+        deleteBill: function(index) {
             var r = confirm("Tem certeza que deseja deletar essa conta?");
             if (r == true) {
                 this.bills.splice(index, 1)
             }
-
         }
     }
 });

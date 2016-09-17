@@ -4,10 +4,7 @@
         <meta charset="UTF-8">
         <title>Vue.js</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-        <style type="text/css">
-            .pago { color: green;}
-            .nao-pago { color: red;}
-        </style>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body id="app">
         <div class="container">
@@ -23,7 +20,7 @@
             </nav>
             <br>
             <div class="row" v-if="activedView === 0">
-                <h5>{{ status }}</h5>
+                <h5 :class="{'grey-text': count === 0, 'green-text': !count, 'red-text': count}">{{ status }}</h5>
                 <table class="bordered striped">
                     <thead>
                         <tr>
@@ -41,12 +38,15 @@
                             <td>{{ c.date_due }}</td>
                             <td>{{ c.name }}</td>
                             <td>{{ c.value | currency 'R$ '}}</td>
-                            <td :class="{'pago': c.done, 'nao-pago': !c.done}">
+                            <td :class="{'green-text': c.done, 'red-text': !c.done}">
                                 {{ c.done | doneLabel }}
+                                <a href="#" @click.prevent="c.done = !c.done">
+                                    <i class="tiny material-icons">done</i>
+                                </a>
                             </td>
                             <td class="center">
-                                <a href="#" @click="loadBill(c)" >Editar</a> |
-                                <a href="#" @click="deleteBill($index)" >Deletar</a>
+                                <a href="#" @click.prevent="loadBill(c)" >Editar</a> |
+                                <a href="#" @click.prevent="deleteBill($index)" >Deletar</a>
                             </td>
                         </tr>
                     </tbody>
@@ -72,6 +72,12 @@
                         <div class="input-field col s6">
                             <input id="value" type="number" min="1" step="any" v-model="bill.value">
                             <label class="active" for="value">Value</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="done" type="checkbox" v-model="bill.done">
+                            <label class="active" for="done">Paga</label>
                         </div>
                     </div>
                     <div class="row">
