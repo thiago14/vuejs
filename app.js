@@ -5,7 +5,7 @@ router.map({
         component: billToPayComponent,
         name: 'bill.pay',
         subRoutes: {
-            '/list': {
+            '/': {
                 name: 'bill.pay.list',
                 component: billListComponent
             },
@@ -23,7 +23,7 @@ router.map({
         component: billToReceiveComponent,
         name: 'bill.receive',
         subRoutes: {
-            '/list': {
+            '/': {
                 name: 'bill.receive.list',
                 component: billReceiveListComponent
             },

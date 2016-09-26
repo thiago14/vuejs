@@ -7,7 +7,7 @@ window.billMenuComponent = Vue.extend({
             <div class="nav-wrapper">
                 <ul id="nav-mobile" class="left">
                     <li v-for="m in menus">
-                        <a v-link="{name: m.routeName, replace: true }" >{{ m.name }}</a>
+                        <a v-link="{name: m.routeName, activeClass: 'blue', exact: true}" >{{ m.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -18,7 +18,7 @@ window.billMenuComponent = Vue.extend({
     data: function () {
         return {
             menus: [
-                { id: 0, name: 'Lista de contas', routeName: this.$route.matched[0].handler.name + '.list'},
+                { id: 0, name: 'Lista de contas', routeName: this.$route.matched[0].handler.name},
                 { id: 1, name: 'Criar conta', routeName: this.$route.matched[0].handler.name + '.create'}
             ],
         }

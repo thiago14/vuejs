@@ -8,7 +8,7 @@ window.mainComponent = Vue.extend({
                 <div class="nav-wrapper">
                     <ul id="nav-mobile" class="left">
                         <li v-for="m in menus">
-                            <a v-link="{ name: m.routeName }">{{ m.name }}</a>
+                            <a v-link="{ name: m.routeName, activeClass: 'blue' }">{{ m.name }}</a>
                         </li>
                     </ul>
                 </div>
