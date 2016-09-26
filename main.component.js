@@ -24,11 +24,15 @@ window.mainComponent = Vue.extend({
                 { id: 2, name: 'Conta a receber', routeName: 'bill.receive'}
             ],
             billsToPay: [
-                {id:0, date_due: '12/12/1221', name: 'Conta de luz', value: 21.3, done: false},
-                {id:1, date_due: '22/12/1221', name: 'Supermercado', value: 213.55, done: false},
-                {id:1, date_due: '22/10/1221', name: 'Cartão', value: 56.55, done: false}
+                {id:0, date_due: '12/12/2016', name: 'Conta de luz', value: 21.30, done: false},
+                {id:1, date_due: '22/11/2016', name: 'Supermercado', value: 213.55, done: false},
+                {id:1, date_due: '22/10/2016', name: 'Cartão', value: 56.55, done: false}
             ],
-            billsToReceive: []
+            billsToReceive: [
+                {id:0, date_due: '12/12/2016', name: 'Salário', value: 2510.30, done: false},
+                {id:1, date_due: '22/11/2016', name: 'Rendimentos', value: 215.55, done: false},
+                {id:1, date_due: '22/10/2016', name: 'Juros', value: 5.55, done: false}
+            ]
         };
     }
 });

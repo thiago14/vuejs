@@ -25,15 +25,15 @@ router.map({
         subRoutes: {
             '/list': {
                 name: 'bill.receive.list',
-                component: billListComponent
+                component: billReceiveListComponent
             },
             '/create': {
                 name: 'bill.receive.create',
-                component: billCreateComponent
+                component: billReceiveCreateComponent
             },
-            '/update': {
+            '/:index/update': {
                 name: 'bill.receive.update',
-                component: billCreateComponent
+                component: billReceiveCreateComponent
             }
         }
     },

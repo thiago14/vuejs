@@ -6,5 +6,12 @@ Vue.filter('doneLabel', function (value) {
         return 'Paga';
     }
     return 'Não paga';
+});
 
+
+Vue.filter('doneLabelReceive', function (value) {
+    if(value) {
+        return 'Recebido';
+    }
+    return 'Não recebido';
 });
