@@ -1,4 +1,4 @@
-window.billToPayComponent = Vue.extend({
+window.billToReceiveComponent = Vue.extend({
     components: {
         'menu-component': billMenuComponent
     },
@@ -10,7 +10,7 @@ window.billToPayComponent = Vue.extend({
         </div>`,
     data: function () {
         return {
-            title: 'Contas a pagar'
+            title: 'Contas a receber'
         };
     }
 });

@@ -1,7 +1,7 @@
 //* ---------------------
 //*   Vue BILL CREATE COMPONENT
 //* ---------------------
-var billCreateComponent = Vue.extend({
+window.billCreateComponent = Vue.extend({
     template: `
         <form class="col s12" @submit.prevent="submit">
             <div class="row">
@@ -57,26 +57,30 @@ var billCreateComponent = Vue.extend({
     methods: {
         submit: function () {
             if(this.formType === 'insert') {
-                this.$dispatch('new-bill', this.bill);
+                this.$root.$children[0].billsToPay.push(this.bill);
             }
-            this.$dispatch('change-activeView', 0);
+            this.$router.go({ name: 'bill.pay.list'});
         },
+        getBill: function (index) {
+            this.bill = this.$root.$children[0].billsToPay[index];
+        }
     },
-    events: {
-        'change-formType': function (formType) {
-            if(formType == 'insert')
+    route: {
+        data: function () {
+            if(this.$route.name === 'bill.pay.update')
             {
+                this.formType = 'update';
+                this.getBill(this.$route.params.index);
+                return;
+            }else{
                 this.bill = {
                     date_due: '',
                     name: '',
                     value: null,
                     done: false
                 };
+                this.formType = 'insert';
             }
-            this.formType = formType
-        },
-        'change-bill': function (bill) {
-            this.bill = bill
         }
     }
 });

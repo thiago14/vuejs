@@ -1,7 +1,7 @@
 //* ---------------------
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
-var billListComponent = Vue.extend({
+window.billListComponent = Vue.extend({
     template: `
         <h5 :class="{'grey-text': count === 0, 'green-text': !count, 'red-text': count}">{{ status }}</h5>
         <table class="bordered striped">
@@ -28,7 +28,7 @@ var billListComponent = Vue.extend({
                         </a>
                     </td>
                     <td class="center">
-                        <a href="#" @click.prevent="loadBill(c)" >Editar</a> |
+                        <a v-link="{name: 'bill.pay.update', params: {index: index}}" >Editar</a> |
                         <a href="#" @click.prevent="deleteBill(c)" >Deletar</a>
                     </td>
                 </tr>
@@ -37,7 +37,7 @@ var billListComponent = Vue.extend({
     `,
     data: function () {
         return {
-            bills: [],
+            bills: this.$root.$children[0].billsToPay,
             count: 0
         }
     },
@@ -59,20 +59,10 @@ var billListComponent = Vue.extend({
         }
     },
     methods: {
-        loadBill: function (bill) {
-            this.$dispatch('change-bill', bill);
-            this.$dispatch('change-activeView', 1);
-            this.$dispatch('change-formType', 'update');
-        },
         deleteBill: function(bill) {
             if (confirm("Tem certeza que deseja deletar essa conta?")) {
                 this.bills.$remove(bill)
             }
-        }
-    },
-    events: {
-        'new-bill': function (bill) {
-            this.bills.push(bill)
         }
     }
 });
