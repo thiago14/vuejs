@@ -22,9 +22,7 @@ window.mainComponent = Vue.extend({
                 { id: 0, name: 'Dashboard', routeName: 'dashboard'},
                 { id: 1, name: 'Contas a pagar', routeName: 'bill.pay'},
                 { id: 2, name: 'Conta a receber', routeName: 'bill.receive'}
-            ],
-            billsToPay: [],
-            billsToReceive: []
+            ]
         };
     }
 });

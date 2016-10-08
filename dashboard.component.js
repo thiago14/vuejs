@@ -16,32 +16,26 @@ window.dashboardComponent = Vue.extend({
                 </a>
                 <p class="collection-item">
                     Total:
-                    <span class="badge">{{ despesas - receita | currency 'R$ '}}</span>
+                    <span class="badge" :class="{'grey-text': receita - despesas === 0, 'green-text': (receita - despesas) > 0, 'red-text': (receita - despesas) < 0}">{{ receita - despesas| currency 'R$ '}}</span>
                 </p>
             </div>
         </div>
     </div>
     `,
-    computed: {
-        despesas: function () {
-            var total = 0,
-                billsToPay = this.$root.$children[0].billsToPay;
-            if(billsToPay.length != 0) {
-                for(var i in billsToPay) {
-                    total += parseFloat(billsToPay[i].value);
-                }
-                return parseFloat(total).toFixed(2);
-            }
-        },
-        receita: function () {
-            var total = 0,
-                billsToReceive = this.$root.$children[0].billsToReceive;
-            if(billsToReceive.length != 0) {
-                for(var i in billsToReceive) {
-                    total += parseFloat(billsToReceive[i].value);
-                }
-                return parseFloat(total).toFixed(2);
-            }
+    data: function () {
+        return {
+            despesas: 0,
+            receita: 0,
+            total: 0
         }
+    },
+    created: function () {
+        var self = this;
+        BillPay.total().then(function (response) {
+            self.despesas = response.data.total;
+        });
+        BillReceive.total().then(function (response) {
+            self.receita = response.data.total;
+        });
     }
 });

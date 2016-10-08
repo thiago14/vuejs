@@ -23,12 +23,12 @@ window.billListComponent = Vue.extend({
                     <td>{{ c.value | currency 'R$ '}}</td>
                     <td :class="{'green-text': c.done, 'red-text': !c.done}">
                         {{ c.done | doneLabel }}
-                        <a href="#" @click.prevent="c.done = !c.done">
+                        <a href="#" @click.prevent="updateBill(c)">
                             <i class="tiny material-icons">done</i>
                         </a>
                     </td>
                     <td class="center">
-                        <a v-link="{name: 'bill.pay.update', params: {index: index}}" >Editar</a> |
+                        <a v-link="{name: 'bill.pay.update', params: {id: c.id}}" >Editar</a> |
                         <a href="#" @click.prevent="deleteBill(c)" >Deletar</a>
                     </td>
                 </tr>
@@ -37,9 +37,15 @@ window.billListComponent = Vue.extend({
     `,
     data: function () {
         return {
-            bills: this.$root.$children[0].billsToPay,
+            bills: [],
             count: 0
         }
+    },
+    created: function () {
+        var self = this;
+        BillPay.query().then(function (response) {
+            self.bills = response.data;
+        });
     },
     computed: {
         status: function () {
@@ -54,14 +60,30 @@ window.billListComponent = Vue.extend({
                         this.count++;
                     }
                 }
-                return !this.count ? 'Nenhuma conta a pagar' : 'Existe(m) '+ this.count + ' conta(s) a ser(em) paga(s)';
+
+                if(!this.count) {
+                    return 'Nenhuma conta a pagar'
+                }
+                else if(this.count == 1) {
+                    return 'Existe 1 conta a ser paga';
+                }
+                else {
+                    return 'Existem '+ this.count + ' contas a serem pagas';
+                }
             }
         }
     },
     methods: {
+        updateBill : function (bill) {
+            bill.done = !bill.done;
+            BillPay.update({id: bill.id}, bill);
+        },
         deleteBill: function(bill) {
             if (confirm("Tem certeza que deseja deletar essa conta?")) {
-                this.bills.$remove(bill)
+                var self = this;
+                BillPay.delete({id: bill.id}).then(function () {
+                    self.bills.$remove(bill);
+                });
             }
         }
     }
