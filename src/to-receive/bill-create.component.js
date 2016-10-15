@@ -6,7 +6,7 @@ window.billReceiveCreateComponent = Vue.extend({
         <form class="col s12" @submit.prevent="submit">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="date_due" type="text" v-model="model.bill.date_due">
+                    <input id="date_due" type="text" v-model="model.bill.date_due | dateFormat">
                     <label class="active" for="date_due">Vencimento</label>
                 </div>
             </div>
@@ -14,13 +14,13 @@ window.billReceiveCreateComponent = Vue.extend({
                 <div class="input-field col s6">
                     <label class="active" for="name">Nome</label>
                     <select class="browser-default" v-model="model.bill.name" id="name">
-                        <option v-for="o in contas" :value="o" >{{ o }}</option>
+                        <option v-for="o in contas" :value="o" >{{ o | stringUppercase }}</option>
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="value" type="number" min="1" step="any" v-model="model.bill.value">
+                    <input id="value" type="text" min="1" step="any" v-model="model.bill.value | currencyFormat">
                     <label class="active" for="value">Value</label>
                 </div>
             </div>
@@ -43,11 +43,11 @@ window.billReceiveCreateComponent = Vue.extend({
             model: {},
             formType: 'insert',
             contas: [
-                'Salário',
-                'Rendimentos',
-                'Juros',
-                'Devolução',
-                'Atrasados'
+                'salário',
+                'rendimentos',
+                'juros',
+                'devolução',
+                'atrasados'
             ]
         }
     },

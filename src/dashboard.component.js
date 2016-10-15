@@ -8,15 +8,17 @@ window.dashboardComponent = Vue.extend({
             <div class="collection">
                 <a v-link="{name: 'bill.pay.list'}" class="collection-item">
                     <span class="red-text">Despesa</span>
-                    <span class="badge red white-text">{{ despesas | currency '-R$ '}}</span>
+                    <span class="badge red white-text">{{ despesas | currencyFormat 'pt-BR' 'BRL'}}</span>
                 </a>
                 <a v-link="{name: 'bill.receive.list'}" class="collection-item">
                     Receita
-                    <span class="badge blue white-text">{{ receita | currency 'R$ '}}</span>
+                    <span class="badge blue white-text">{{ receita | currencyFormat }}</span>
                 </a>
                 <p class="collection-item">
                     Total:
-                    <span class="badge" :class="{'grey-text': receita - despesas === 0, 'green-text': (receita - despesas) > 0, 'red-text': (receita - despesas) < 0}">{{ receita - despesas| currency 'R$ '}}</span>
+                    <span class="badge" :class="{'grey-text': receita - despesas === 0, 'green-text': (receita - despesas) > 0, 'red-text': (receita - despesas) < 0}">
+                        {{ receita - despesas| currencyFormat }}
+                    </span>
                 </p>
             </div>
         </div>

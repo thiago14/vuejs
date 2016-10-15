@@ -18,9 +18,9 @@ window.billListComponent = Vue.extend({
             <tbody>
                 <tr v-for="(index, c) in model.bills">
                     <td>{{ index + 1 }}</td>
-                    <td>{{ c.date_due }}</td>
-                    <td>{{ c.name }}</td>
-                    <td>{{ c.value | currency 'R$ '}}</td>
+                    <td>{{ c.date_due | dateFormat }}</td>
+                    <td>{{ c.name | stringUppercase }}</td>
+                    <td>{{ c.value | currencyFormat }}</td>
                     <td :class="{'green-text': c.done, 'red-text': !c.done}">
                         {{ c.done | doneLabel }}
                         <a href="#" @click.prevent="updateBill(c)">
