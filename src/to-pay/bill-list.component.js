@@ -16,7 +16,7 @@ window.billListComponent = Vue.extend({
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(index, c) in bills">
+                <tr v-for="(index, c) in model.bills">
                     <td>{{ index + 1 }}</td>
                     <td>{{ c.date_due }}</td>
                     <td>{{ c.name }}</td>
@@ -37,27 +37,25 @@ window.billListComponent = Vue.extend({
     `,
     data: function () {
         return {
-            bills: [],
+            model: {},
             count: 0
         }
     },
-    created: function () {
-        var self = this;
-        BillPay.query().then(function (response) {
-            self.bills = response.data;
-        });
+    ready: function () {
+        this.model = new BillsModel(BillPay)
+        this.model.list()
     },
     computed: {
         status: function () {
-            this.count = null;
+            this.count = null
 
-            if(this.bills.length == 0) {
-                this.count = this.bills.length;
-                return 'Nenhuma conta cadastrada';
+            if(this.model.bills.length == 0) {
+                this.count = this.model.bills.length
+                return 'Nenhuma conta cadastrada'
             }else {
-                for(var i in this.bills) {
-                    if(!this.bills[i].done) {
-                        this.count++;
+                for(let i in this.model.bills) {
+                    if(!this.model.bills[i].done) {
+                        this.count++
                     }
                 }
 
@@ -65,26 +63,23 @@ window.billListComponent = Vue.extend({
                     return 'Nenhuma conta a pagar'
                 }
                 else if(this.count == 1) {
-                    return 'Existe 1 conta a ser paga';
+                    return 'Existe 1 conta a ser paga'
                 }
                 else {
-                    return 'Existem '+ this.count + ' contas a serem pagas';
+                    return 'Existem '+ this.count + ' contas a serem pagas'
                 }
             }
         }
     },
     methods: {
         updateBill : function (bill) {
-            bill.done = !bill.done;
-            BillPay.update({id: bill.id}, bill);
+            bill.done = !bill.done
+            this.model.update(bill)
         },
         deleteBill: function(bill) {
             if (confirm("Tem certeza que deseja deletar essa conta?")) {
-                var self = this;
-                BillPay.delete({id: bill.id}).then(function () {
-                    self.bills.$remove(bill);
-                });
+                this.model.delete(bill)
             }
         }
     }
-});
+})

@@ -30,12 +30,11 @@ window.dashboardComponent = Vue.extend({
         }
     },
     created: function () {
-        var self = this;
-        BillPay.total().then(function (response) {
-            self.despesas = response.data.total;
-        });
-        BillReceive.total().then(function (response) {
-            self.receita = response.data.total;
-        });
+        BillPay.total().then((response) => {
+            this.despesas = response.data.total
+        })
+        BillReceive.total().then((response) => {
+            this.receita = response.data.total
+        })
     }
-});
+})

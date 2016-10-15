@@ -1,17 +1,6 @@
 //* ---------------------
 //*   Vue FILTER LABEL
 //* ---------------------
-Vue.filter('doneLabel', function (value) {
-    if(value) {
-        return 'Paga';
-    }
-    return 'Não paga';
-});
+Vue.filter('doneLabel', (value) => (value) ? 'Paga': 'Não paga' )
 
-
-Vue.filter('doneLabelReceive', function (value) {
-    if(value) {
-        return 'Recebido';
-    }
-    return 'Não recebido';
-});
+Vue.filter('doneLabelReceive', (value) => (value) ? 'Recebido' : 'Não recebido' )
