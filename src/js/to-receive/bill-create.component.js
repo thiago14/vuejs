@@ -3,6 +3,14 @@
 //* ---------------------
 window.billReceiveCreateComponent = Vue.extend({
     template: `
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12 center">
+                <h5 v-if="model.bill.id === null">Nova conta</h5>
+                <h5 v-if="model.bill.id !== null">Editar conta</h5>
+                <div class="divider"></div>
+            </div>
+        </div>
         <form class="col s12" @submit.prevent="submit">
             <div class="row">
                 <div class="input-field col s6">
@@ -38,7 +46,7 @@ window.billReceiveCreateComponent = Vue.extend({
             </div>
         </form>
     `,
-    data: function () {
+    data() {
         return {
             model: {},
             formType: 'insert',
@@ -52,7 +60,7 @@ window.billReceiveCreateComponent = Vue.extend({
         }
     },
     methods: {
-        submit: function () {
+        submit() {
             if(this.formType === 'insert') {
                 this.model.save()
                     .then(() => {
@@ -68,7 +76,7 @@ window.billReceiveCreateComponent = Vue.extend({
         }
     },
     route: {
-        data: function () {
+        data() {
             this.model = new BillsModel(BillReceive)
             if(this.$route.name === 'bill.receive.update')
             {

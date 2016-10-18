@@ -1,16 +1,17 @@
 window.billToPayComponent = Vue.extend({
-    components: {
-        'menu-component': billMenuComponent
-    },
     template: `
         <div class="container">
-            <h1>{{ title }}</h1>
-            <menu-component></menu-component>
+            <div class="row valign-wrapper margin-none">
+                <h4 class="col s10 valign">{{ title }}</h4>
+                <a v-link="{name: 'bill.pay.create'}" class="btn col s2" v-if="this.$route.name === 'bill.pay.list'">Nova conta</a>
+                <a v-link="{name: 'bill.pay.list'}" class="btn col s2" v-if="this.$route.name !== 'bill.pay.list'">Listagem</a>
+            </div>
+            <router-view></router-view>
             <br>
         </div>`,
-    data: function () {
+    data() {
         return {
             title: 'Contas a pagar'
-        };
+        }
     }
-});
+})

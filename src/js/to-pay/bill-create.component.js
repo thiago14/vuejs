@@ -3,11 +3,19 @@
 //* ---------------------
 window.billCreateComponent = Vue.extend({
     template: `
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s12 center">
+                <h5 v-if="model.bill.id === null">Nova conta</h5>
+                <h5 v-if="model.bill.id !== null">Editar conta</h5>
+                <div class="divider"></div>
+            </div>
+        </div>
         <form class="col s12" @submit.prevent="submit">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="date_due" type="text" v-model="model.bill.date_due | dateFormat">
                     <label class="active" for="date_due">Vencimento</label>
+                    <input id="date_due" type="text" v-model="model.bill.date_due | dateFormat">
                 </div>
             </div>
             <div class="row">
@@ -38,7 +46,7 @@ window.billCreateComponent = Vue.extend({
             </div>
         </form>
     `,
-    data: function () {
+    data() {
         return {
             model: {},
             formType: 'insert',
@@ -55,7 +63,7 @@ window.billCreateComponent = Vue.extend({
         }
     },
     methods: {
-        submit: function () {
+        submit() {
             if(this.formType === 'insert') {
                 this.model.save()
                     .then(() => {
@@ -71,7 +79,7 @@ window.billCreateComponent = Vue.extend({
         }
     },
     route: {
-        data: function () {
+        data() {
             this.model = new BillsModel(BillPay)
             if(this.$route.name === 'bill.pay.update')
             {

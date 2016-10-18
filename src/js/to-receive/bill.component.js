@@ -1,16 +1,17 @@
 window.billToReceiveComponent = Vue.extend({
-    components: {
-        'menu-component': billMenuComponent
-    },
     template: `
         <div class="container">
-            <h1>{{ title }}</h1>
-            <menu-component></menu-component>
+            <div class="row valign-wrapper margin-none">
+                <h4 class="col s10 valign">{{ title }}</h4>
+                <a v-link="{name: 'bill.receive.create'}" class="btn col s2" v-if="this.$route.name === 'bill.receive.list'">Nova conta</a>
+                <a v-link="{name: 'bill.receive.list'}" class="btn col s2" v-if="this.$route.name !== 'bill.receive.list'">Listagem</a>
+            </div>
+            <router-view></router-view>
             <br>
         </div>`,
-    data: function () {
+    data() {
         return {
             title: 'Contas a receber'
-        };
+        }
     }
-});
+})

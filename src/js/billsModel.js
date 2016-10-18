@@ -29,9 +29,10 @@ class BillsModel {
     resetBill() {
         this.bill = {
             date_due: '',
+            done: false,
+            id: null,
             name: '',
-            value: null,
-            done: false
+            value: null
         }
     }
 

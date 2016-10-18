@@ -3,8 +3,40 @@
 //* ---------------------
 window.billListComponent = Vue.extend({
     template: `
-        <h5 :class="{'grey-text': count === 0, 'green-text': !count, 'red-text': count}">{{ status }}</h5>
-        <table class="bordered striped">
+        <div class="section">
+            <div class="row">
+                <div class="col s6">
+                    <div class="card z-depth-2">
+                        <div class="card-content ">
+                            <p class="card-title valign-wrapper">
+                                <i class="material-icons left">account_balance</i><span class="valign">Contas a Pagar</span>
+                            </p>
+                            <h5 :class="{'grey-text': count === 0, 'green-text': !count, 'red-text': count}">{{ status }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="card z-depth-2">
+                        <div class="card-content ">
+                            <p class="card-title valign-wrapper">
+                                <i class="material-icons left">payment</i><span class="valign">Total a Pagar</span>
+                            </p>
+                            <h5 class="right-align">{{ total | currencyFormat }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col s12">
+                    <h5 class="center-align">Lista de contas</h5>
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </div>
+        <table class="bordered striped z-depth-2">
             <thead>
                 <tr>
                     <th>#</th>
@@ -35,23 +67,27 @@ window.billListComponent = Vue.extend({
             </tbody>
         </table>
     `,
-    data: function () {
+    data() {
         return {
+            count: 0,
             model: {},
-            count: 0
+            total: 0
         }
     },
-    ready: function () {
+    ready() {
         this.model = new BillsModel(BillPay)
         this.model.list()
+        BillPay.total().then((response) => {
+            this.total = response.data.total
+        })
     },
     computed: {
-        status: function () {
+        status() {
             this.count = null
 
             if(this.model.bills.length == 0) {
                 this.count = this.model.bills.length
-                return 'Nenhuma conta cadastrada'
+                return 'Sem registros'
             }else {
                 for(let i in this.model.bills) {
                     if(!this.model.bills[i].done) {
@@ -60,23 +96,23 @@ window.billListComponent = Vue.extend({
                 }
 
                 if(!this.count) {
-                    return 'Nenhuma conta a pagar'
+                    return 'Nenhuma conta'
                 }
                 else if(this.count == 1) {
-                    return 'Existe 1 conta a ser paga'
+                    return 'Há 1 conta'
                 }
                 else {
-                    return 'Existem '+ this.count + ' contas a serem pagas'
+                    return 'Há ' + this.count + ' contas'
                 }
             }
         }
     },
     methods: {
-        updateBill : function (bill) {
+        updateBill(bill) {
             bill.done = !bill.done
             this.model.update(bill)
         },
-        deleteBill: function(bill) {
+        deleteBill(bill) {
             if (confirm("Tem certeza que deseja deletar essa conta?")) {
                 this.model.delete(bill)
             }
