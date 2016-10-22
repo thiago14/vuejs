@@ -2,6 +2,9 @@
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
 window.billListComponent = Vue.extend({
+    components: {
+        modal: modalComponent
+    },
     template: `
         <div class="section">
             <div class="row">
@@ -61,11 +64,21 @@ window.billListComponent = Vue.extend({
                     </td>
                     <td class="center">
                         <a v-link="{name: 'bill.pay.update', params: {id: c.id}}" >Editar</a> |
-                        <a href="#" @click.prevent="deleteBill(c)" >Deletar</a>
+                        <a href="#" @click.prevent="openModalDelete(c)" >Deletar</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <modal :modal="'modal-delete'">
+            <div slot="message">
+                <p><strong>Tem certeza que deseja deletar essa conta?</strong></p>
+                <div class="divider"></div>
+                <p>Name: <strong>{{model.bill.name | stringUppercase}}</strong></p>
+                <p>Valor: <strong>{{model.bill.value | currencyFormat}}</strong></p>
+                <p>Data de vencimento: <strong>{{model.bill.date_due | dateFormat}}</strong></p>
+            </div>
+            <button class="modal-action modal-close modal-action waves-effect waves-green btn-flat green" slot="confirm" @click="deleteBill()">Confirmar</button>
+        </modal>
     `,
     data() {
         return {
@@ -112,10 +125,12 @@ window.billListComponent = Vue.extend({
             bill.done = !bill.done
             this.model.update(bill)
         },
-        deleteBill(bill) {
-            if (confirm("Tem certeza que deseja deletar essa conta?")) {
-                this.model.delete(bill)
-            }
+        deleteBill() {
+            this.model.delete(this.model.bill)
+        },
+        openModalDelete(bill){
+            this.model.bill = bill
+            $('#modal-delete').openModal()
         }
     }
 })

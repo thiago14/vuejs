@@ -45,7 +45,7 @@ Vue.filter('dateFormat', {
 
 Vue.filter('stringUppercase', {
     read(value) {
-        if(value.length > 0)
+        if(value !== undefined && value.length > 0)
         {
             return value.toUpperCase()
         }
@@ -53,7 +53,7 @@ Vue.filter('stringUppercase', {
 
     },
     write (value) {
-        if(value.length > 0)
+        if(value !== undefined && value.length > 0)
         {
             return value. toLowerCase()
         }
