@@ -1,9 +1,14 @@
 //* ---------------------
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
-window.billListComponent = Vue.extend({
+
+import {BillPayResource} from '../resources'
+import BillsModel from '../billsModel'
+import ModalComponent from '../modal.component'
+
+let billListComponent = {
     components: {
-        modal: modalComponent
+        modal: ModalComponent
     },
     template: `
         <div class="section">
@@ -88,9 +93,9 @@ window.billListComponent = Vue.extend({
         }
     },
     ready() {
-        this.model = new BillsModel(BillPay)
+        this.model = new BillsModel(BillPayResource)
         this.model.list()
-        BillPay.total().then((response) => {
+        BillPayResource.total().then((response) => {
             this.total = response.data.total
         })
     },
@@ -133,4 +138,6 @@ window.billListComponent = Vue.extend({
             $('#modal-delete').openModal()
         }
     }
-})
+}
+
+export default billListComponent

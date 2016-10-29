@@ -1,7 +1,10 @@
 //* ---------------------
 //*   Vue BILL CREATE COMPONENT
 //* ---------------------
-window.billCreateComponent = Vue.extend({
+import {BillPayResource} from '../resources'
+import BillsModel from '../billsModel'
+
+let billCreateComponent = {
     template: `
         <div class="divider"></div>
         <div class="row">
@@ -80,7 +83,7 @@ window.billCreateComponent = Vue.extend({
     },
     route: {
         data() {
-            this.model = new BillsModel(BillPay)
+            this.model = new BillsModel(BillPayResource)
             if(this.$route.name === 'bill.pay.update')
             {
                 this.formType = 'update'
@@ -92,4 +95,6 @@ window.billCreateComponent = Vue.extend({
             }
         }
     }
-})
+}
+
+export default billCreateComponent

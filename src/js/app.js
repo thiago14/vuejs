@@ -1,4 +1,19 @@
-let router = new VueRouter();
+require('materialize-css')
+window.Vue = require('vue')
+require('vue-resource')
+require('./filters')
+
+import mainComponent from './main.component'
+import billToPayComponent from './to-pay/bill.component'
+import billListComponent from './to-pay/bill-list.component'
+import billCreateComponent from './to-pay/bill-create.component'
+import billToReceiveComponent from './to-receive/bill.component'
+import billReceiveListComponent from './to-receive/bill-list.component'
+import billReceiveCreateComponent from './to-receive/bill-create.component'
+import dashboardComponent from './dashboard.component'
+
+let VueRouter = require("vue-router")
+let router = new VueRouter()
 
 router.map({
     '/bill-to-pay': {
@@ -44,14 +59,14 @@ router.map({
     '*': {
         component: dashboardComponent
     }
-});
+})
 
 router.start({
     components: {
         'main-component': mainComponent
     }
-}, '#app');
+}, '#app')
 
 router.redirect({
    "*": '/dashboard'
-});
+})

@@ -1,4 +1,4 @@
-window.billToReceiveComponent = Vue.extend({
+let billToReceiveComponent = {
     template: `
         <div class="container">
             <div class="row valign-wrapper margin-none">
@@ -14,4 +14,6 @@ window.billToReceiveComponent = Vue.extend({
             title: 'Contas a receber'
         }
     }
-})
+}
+
+export default billToReceiveComponent

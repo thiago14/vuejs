@@ -1,9 +1,14 @@
 //* ---------------------
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
-window.billReceiveListComponent = Vue.extend({
+
+import {BillReceiveResource} from '../resources'
+import BillsModel from '../billsModel'
+import ModalComponent from '../modal.component'
+
+let billReceiveListComponent = {
     components: {
-        modal: modalComponent
+        modal: ModalComponent
     },
     template: `
         <div class="section">
@@ -88,9 +93,9 @@ window.billReceiveListComponent = Vue.extend({
         }
     },
     ready() {
-        this.model = new BillsModel(BillReceive)
+        this.model = new BillsModel(BillReceiveResource)
         this.model.list()
-        BillReceive.total().then((response) => {
+        BillReceiveResource.total().then((response) => {
             this.total = response.data.total
         })
     },
@@ -133,4 +138,6 @@ window.billReceiveListComponent = Vue.extend({
             $('#modal-delete').openModal()
         }
     }
-})
+}
+
+export default billReceiveListComponent

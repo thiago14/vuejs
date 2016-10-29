@@ -1,7 +1,7 @@
 //* ---------------------
 //*   Vue APP COMPONENT
 //* ---------------------
-window.mainComponent = Vue.extend({
+let mainComponent = {
     template: `
         <ul id="{{menu.subMenuId}}" class="dropdown-content" v-for="menu in menus">
             <li v-for="sub in menu.subMenus">
@@ -64,13 +64,15 @@ window.mainComponent = Vue.extend({
                     { id: 1, name: 'Criar conta', routeName: 'bill.receive.create'}
                 ]}
             ]
-        };
+        }
     },
     created(){
         $(document).ready(() => {
-            $(".button-collapse").sideNav();
-            $(".dropdown-button").dropdown();
-            $('.collapsible').collapsible();
+            $(".button-collapse").sideNav()
+            $(".dropdown-button").dropdown()
+            $('.collapsible').collapsible()
         })
     }
-});
+}
+
+export default mainComponent

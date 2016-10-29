@@ -1,7 +1,7 @@
 //* ---------------------
 //*   Vue Modal COMPONENT
 //* ---------------------
-window.modalComponent = Vue.extend({
+let modalComponent = {
     template: `
     <div :id="modal" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -32,4 +32,6 @@ window.modalComponent = Vue.extend({
             modal: ''
         }
     }
-})
+}
+
+export default modalComponent

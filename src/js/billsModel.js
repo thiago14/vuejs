@@ -64,3 +64,5 @@ class BillsModel {
         })
     }
 }
+
+export default BillsModel

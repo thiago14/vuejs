@@ -1,4 +1,4 @@
-window.billToPayComponent = Vue.extend({
+let billToPayComponent = {
     template: `
         <div class="container">
             <div class="row valign-wrapper margin-none">
@@ -14,4 +14,6 @@ window.billToPayComponent = Vue.extend({
             title: 'Contas a pagar'
         }
     }
-})
+}
+
+export default billToPayComponent

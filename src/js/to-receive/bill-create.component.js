@@ -1,7 +1,11 @@
 //* ---------------------
 //*   Vue BILL CREATE COMPONENT
 //* ---------------------
-window.billReceiveCreateComponent = Vue.extend({
+
+import {BillReceiveResource} from '../resources'
+import BillsModel from '../billsModel'
+
+let billReceiveCreateComponent = {
     template: `
         <div class="divider"></div>
         <div class="row">
@@ -77,7 +81,7 @@ window.billReceiveCreateComponent = Vue.extend({
     },
     route: {
         data() {
-            this.model = new BillsModel(BillReceive)
+            this.model = new BillsModel(BillReceiveResource)
             if(this.$route.name === 'bill.receive.update')
             {
                 this.formType = 'update'
@@ -89,4 +93,6 @@ window.billReceiveCreateComponent = Vue.extend({
             }
         }
     }
-});
+}
+
+export default billReceiveCreateComponent
