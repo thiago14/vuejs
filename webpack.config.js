@@ -41,7 +41,6 @@ module.exports = {
     },
     devServer: {
         host: 'localhost',
-        port: '8081',
         inline: true,
         watchOptions: {
             poll: true,

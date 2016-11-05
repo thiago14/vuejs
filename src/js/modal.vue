@@ -1,8 +1,7 @@
 //* ---------------------
-//*   Vue Modal COMPONENT
+//*   Vue MODAL COMPONENT
 //* ---------------------
-let modalComponent = {
-    template: `
+<template>
     <div :id="modal" class="modal">
         <div class="modal-content">
             <slot name="content">
@@ -25,13 +24,9 @@ let modalComponent = {
             </slot>
         </div>
     </div>
-    `,
-    props:['modal'],
-    data() {
-        return {
-            modal: ''
-        }
-    }
+</template>
+<script type="text/javascript">
+export default {
+    props:['modal']
 }
-
-export default modalComponent
+</script>

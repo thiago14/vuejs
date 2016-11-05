@@ -1,4 +1,4 @@
-Vue.http.options.root = 'http://localhost:8080/api'
+Vue.http.options.root = 'http://localhost:8001/api'
 
 let Bill = {}
 Bill.pay = Vue.resource('bills-pay{/id}', {}, {

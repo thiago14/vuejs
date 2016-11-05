@@ -1,15 +1,16 @@
 import './bootstrap'
 
-import mainComponent from './main.component'
-import billToPayComponent from './to-pay/bill.component'
-import billListComponent from './to-pay/bill-list.component'
-import billCreateComponent from './to-pay/bill-create.component'
-import billToReceiveComponent from './to-receive/bill.component'
-import billReceiveListComponent from './to-receive/bill-list.component'
-import billReceiveCreateComponent from './to-receive/bill-create.component'
-import dashboardComponent from './dashboard.component'
+import mainComponent from './main.vue'
+import billListComponent from './to-pay/bill-list.vue'
+import billToPayComponent from './to-pay/bill.vue'
+import billCreateComponent from './to-pay/bill-create.vue'
+import billToReceiveComponent from './to-receive/bill.vue'
+import billReceiveListComponent from './to-receive/bill-list.vue'
+import billReceiveCreateComponent from './to-receive/bill-create.vue'
+import dashboardComponent from './dashboard.vue'
 
-let VueRouter = require("vue-router")
+// let VueRouter = require("vue-router")
+import VueRouter from 'vue-router'
 let router = new VueRouter()
 
 router.map({
