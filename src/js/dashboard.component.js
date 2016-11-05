@@ -1,7 +1,10 @@
 //* ---------------------
 //*   Vue APP COMPONENT
 //* ---------------------
-window.dashboardComponent = Vue.extend({
+
+import BillResource from './resources'
+
+let dashboardComponent = {
     template: `
     <div class="container">
         <div class="section">
@@ -54,11 +57,13 @@ window.dashboardComponent = Vue.extend({
         }
     },
     created() {
-        BillPay.total().then((response) => {
+        BillResource.pay.total().then((response) => {
             this.despesas = response.data.total
         })
-        BillReceive.total().then((response) => {
+        BillResource.receive.total().then((response) => {
             this.receita = response.data.total
         })
     }
-})
+}
+
+export default dashboardComponent

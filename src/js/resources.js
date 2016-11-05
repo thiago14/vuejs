@@ -1,11 +1,12 @@
 Vue.http.options.root = 'http://localhost:8080/api'
 
-let BillPay = Vue.resource('bills-pay{/id}', {}, {
+let Bill = {}
+Bill.pay = Vue.resource('bills-pay{/id}', {}, {
     total: { method: 'GET', url: 'bills-pay/total'}
 })
 
-let BillReceive = Vue.resource('bills-receive{/id}', {}, {
+Bill.receive = Vue.resource('bills-receive{/id}', {}, {
     total: { method: 'GET', url: 'bills-receive/total'}
 })
 
-export {BillPay, BillReceive}
+export default Bill

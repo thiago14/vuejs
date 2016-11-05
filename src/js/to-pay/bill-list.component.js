@@ -2,8 +2,8 @@
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
 
-import {BillPayResource} from '../resources'
-import BillsModel from '../billsModel'
+
+import BillPayModel from './BillPayModel'
 import ModalComponent from '../modal.component'
 
 let billListComponent = {
@@ -93,9 +93,9 @@ let billListComponent = {
         }
     },
     ready() {
-        this.model = new BillsModel(BillPayResource)
+        this.model = new BillPayModel()
         this.model.list()
-        BillPayResource.total().then((response) => {
+        this.model.total().then((response) => {
             this.total = response.data.total
         })
     },

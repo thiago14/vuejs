@@ -63,6 +63,10 @@ class BillsModel {
             Materialize.toast('Ocorreu um erro ao atualizar!', 4000, 'red')
         })
     }
+
+    total() {
+        return this._BillApi.total()
+    }
 }
 
 export default BillsModel

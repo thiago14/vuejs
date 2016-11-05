@@ -2,8 +2,7 @@
 //*   Vue BILL LIST COMPONENT
 //* ---------------------
 
-import {BillReceiveResource} from '../resources'
-import BillsModel from '../billsModel'
+import BillReceiveModel from './BillReceiveModel'
 import ModalComponent from '../modal.component'
 
 let billReceiveListComponent = {
@@ -93,9 +92,9 @@ let billReceiveListComponent = {
         }
     },
     ready() {
-        this.model = new BillsModel(BillReceiveResource)
+        this.model = new BillReceiveModel()
         this.model.list()
-        BillReceiveResource.total().then((response) => {
+        this.model.total().then((response) => {
             this.total = response.data.total
         })
     },

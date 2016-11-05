@@ -2,8 +2,7 @@
 //*   Vue BILL CREATE COMPONENT
 //* ---------------------
 
-import {BillReceiveResource} from '../resources'
-import BillsModel from '../billsModel'
+import BillReceiveModel from './BillReceiveModel'
 
 let billReceiveCreateComponent = {
     template: `
@@ -81,7 +80,7 @@ let billReceiveCreateComponent = {
     },
     route: {
         data() {
-            this.model = new BillsModel(BillReceiveResource)
+            this.model = new BillReceiveModel()
             if(this.$route.name === 'bill.receive.update')
             {
                 this.formType = 'update'

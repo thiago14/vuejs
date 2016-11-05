@@ -3,7 +3,7 @@
 //* ---------------------
 let modalComponent = {
     template: `
-    <div :id="modal" class="modal modal-fixed-footer">
+    <div :id="modal" class="modal">
         <div class="modal-content">
             <slot name="content">
                 <slot name="title">
