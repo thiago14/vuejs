@@ -1,7 +1,4 @@
-require('materialize-css')
-window.Vue = require('vue')
-require('vue-resource')
-require('./filters')
+import './bootstrap'
 
 import mainComponent from './main.component'
 import billToPayComponent from './to-pay/bill.component'

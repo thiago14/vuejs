@@ -31,8 +31,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loader: extractCSS.extract(['css', 'sass']),
-                loader: ['css', 'sass']
+                loader: extractCSS.extract(['css', 'sass'])
             },
             {
                 test: /\.vue$/,
@@ -42,6 +41,7 @@ module.exports = {
     },
     devServer: {
         host: 'localhost',
+        port: '8081',
         inline: true,
         watchOptions: {
             poll: true,
