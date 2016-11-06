@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel": "CHOKIDAR_USERPOLLING=true babel src --out-dir dist --watch",
-    "api": "cd api && php -S 0.0.0.0:8001",
-    "start": "webpack-dev-server"
+    "start": "concurrently \"webpack-dev-server\" \"cd api && php -S 0.0.0.0:8001\"",
+    "build": "webpack"
   },
   "author": "Thiago Mori",
   "license": "ISC",
