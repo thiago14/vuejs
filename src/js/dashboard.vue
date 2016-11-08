@@ -1,8 +1,7 @@
 //* ---------------------
-//*   Vue APP COMPONENT
+//*   Vue DASHBOARD COMPONENT
 //* ---------------------
-window.dashboardComponent = Vue.extend({
-    template: `
+<template>
     <div class="container">
         <div class="section">
             <div class="row">
@@ -45,20 +44,24 @@ window.dashboardComponent = Vue.extend({
             </div>
         </div>
     </div>
-    `,
-    data() {
-        return {
-            despesas: 0,
-            receita: 0,
-            total: 0
+</template>
+<script type="text/javascript">
+    import BillResource from './resources'
+    export default {
+        data() {
+            return {
+                despesas: 0,
+                receita: 0,
+                total: 0
+            }
+        },
+        created() {
+            BillResource.pay.total().then((response) => {
+                this.despesas = response.data.total
+            })
+            BillResource.receive.total().then((response) => {
+                this.receita = response.data.total
+            })
         }
-    },
-    created() {
-        BillPay.total().then((response) => {
-            this.despesas = response.data.total
-        })
-        BillReceive.total().then((response) => {
-            this.receita = response.data.total
-        })
     }
-})
+</script>

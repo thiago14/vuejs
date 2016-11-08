@@ -1,4 +1,17 @@
-let router = new VueRouter();
+import './bootstrap'
+
+import mainComponent from './main.vue'
+import billListComponent from './to-pay/bill-list.vue'
+import billToPayComponent from './to-pay/bill.vue'
+import billCreateComponent from './to-pay/bill-create.vue'
+import billToReceiveComponent from './to-receive/bill.vue'
+import billReceiveListComponent from './to-receive/bill-list.vue'
+import billReceiveCreateComponent from './to-receive/bill-create.vue'
+import dashboardComponent from './dashboard.vue'
+
+// let VueRouter = require("vue-router")
+import VueRouter from 'vue-router'
+let router = new VueRouter()
 
 router.map({
     '/bill-to-pay': {
@@ -44,14 +57,14 @@ router.map({
     '*': {
         component: dashboardComponent
     }
-});
+})
 
 router.start({
     components: {
         'main-component': mainComponent
     }
-}, '#app');
+}, '#app')
 
 router.redirect({
    "*": '/dashboard'
-});
+})

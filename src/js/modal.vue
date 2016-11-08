@@ -1,9 +1,8 @@
 //* ---------------------
-//*   Vue Modal COMPONENT
+//*   Vue MODAL COMPONENT
 //* ---------------------
-window.modalComponent = Vue.extend({
-    template: `
-    <div :id="modal" class="modal modal-fixed-footer">
+<template>
+    <div :id="modal" class="modal">
         <div class="modal-content">
             <slot name="content">
                 <slot name="title">
@@ -25,11 +24,9 @@ window.modalComponent = Vue.extend({
             </slot>
         </div>
     </div>
-    `,
-    props:['modal'],
-    data() {
-        return {
-            modal: ''
-        }
-    }
-})
+</template>
+<script type="text/javascript">
+export default {
+    props:['modal']
+}
+</script>
