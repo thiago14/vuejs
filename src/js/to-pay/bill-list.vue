@@ -65,7 +65,7 @@
         </tr>
         </tbody>
     </table>
-    <modal :modal="'modal-delete'">
+    <modal :modal="'modal-delete'" v-if="model.id">
         <div slot="message">
             <p><strong>Tem certeza que deseja deletar essa conta?</strong></p>
             <div class="divider"></div>

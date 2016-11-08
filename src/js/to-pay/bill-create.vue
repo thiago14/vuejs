@@ -51,7 +51,9 @@
     export default {
         data() {
             return {
-                model: {},
+                model: {
+                    bill: {}
+                },
                 formType: 'insert',
                 contas: [
                     'conta de luz',

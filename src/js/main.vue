@@ -16,7 +16,7 @@
                         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                         <ul id="nav-mobile" class="hide-on-med-and-down left">
                             <li v-for="m in menus">
-                                <a v-link="#!" v-if="m.subMenuId" class="dropdown-button" data-activates="{{m.subMenuId}}">
+                                <a href="#!" v-if="m.subMenuId" class="dropdown-button" data-activates="{{m.subMenuId}}">
                                     {{ m.name }} <i class="material-icons right">arrow_drop_down</i>
                                 </a>
                                 <a v-link="{name: m.routeName}" v-if="!m.subMenuId" >
