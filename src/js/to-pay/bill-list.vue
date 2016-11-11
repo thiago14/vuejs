@@ -65,8 +65,8 @@
         </tr>
         </tbody>
     </table>
-    <modal :modal="'modal-delete'" v-if="model.id">
-        <div slot="message">
+    <modal :modal="'modal-delete'">
+        <div slot="message" v-if="model.id">
             <p><strong>Tem certeza que deseja deletar essa conta?</strong></p>
             <div class="divider"></div>
             <p>Name: <strong>{{model.bill.name | stringUppercase}}</strong></p>
@@ -103,8 +103,8 @@
                 this.model.delete(this.model.bill)
             },
             openModalDelete(bill){
-                this.model.bill = bill
-                $('#modal-delete').openModal()
+                this.model.bill = bill;
+                $('#modal-delete').modal('open');
             }
         }
     }

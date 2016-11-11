@@ -27,6 +27,9 @@
 </template>
 <script type="text/javascript">
 export default {
-    props:['modal']
+    props:['modal'],
+    ready(){
+        $(document).ready(() => $(`#${this.modal}`).modal());
+    }
 }
 </script>
